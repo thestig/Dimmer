@@ -1,0 +1,5 @@
+A simple iPhone app that uses a private API to toggle the screen
+brightness between your current setting and 0.
+
+Useful if you want to use your iPhone in low-light conditions without always going to the
+Settings app.
