@@ -10,8 +10,8 @@
 
 @interface UIApplication(private)
 
-- (void) setBrightnessLevel: (float) brightness;
-- (float) brightnessLevel;
+- (void) setBacklightLevel: (float) level;
+- (float) backlightLevel;
 
 @end
 
@@ -26,23 +26,24 @@
 	UIApplication *app = [UIApplication sharedApplication];
 	float curBrightness = 0.0;
 	
-	if ([app respondsToSelector: @selector(brightnessLevel)])
-		curBrightness = [app brightnessLevel];
+	if ([app respondsToSelector: @selector(backlightLevel)])
+		curBrightness = [app backlightLevel];
 
 	if (curBrightness > 0.0)
 	{
 		[defaults setFloat: curBrightness forKey: @"brightness"];
-		if ([app respondsToSelector: @selector(setBrightnessLevel:)])
-			[app setBrightnessLevel: 0.0];
+		if ([app respondsToSelector: @selector(setBacklightLevel:)])
+			[app setBacklightLevel: 0.0];
 	}
 	else
 	{
 		float savedBrightness = [defaults floatForKey: @"brightness"];
 		if (savedBrightness > 0.0)
-			if ([app respondsToSelector: @selector(setBrightnessLevel:)])
-				[app setBrightnessLevel: savedBrightness];
+			if ([app respondsToSelector: @selector(setBacklightLevel:)])
+				[app setBacklightLevel: savedBrightness];
 	}
 
+	[defaults synchronize];
 	exit(0);
 	//[window makeKeyAndVisible];
 }
